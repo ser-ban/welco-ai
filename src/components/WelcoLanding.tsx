@@ -111,16 +111,16 @@ const WelcoLanding = () => {
                 </div>
                 <div className="space-y-4">
                   <div className="bg-[#e7f3ff] p-3 rounded-lg">
-                    <p className="text-sm">Hello! The coffee machine isn't working properly</p>
+                    <p className="text-sm">{t('whatsapp_problem')}</p>
                   </div>
                   <div className="bg-[#f0fdf4] p-3 rounded-lg ml-8">
-                    <p className="text-sm">I can help with that! First, check if the water tank is properly seated...</p>
+                    <p className="text-sm">{t('whatsapp_solution')}</p>
                   </div>
                   <div className="bg-[#e7f3ff] p-3 rounded-lg">
-                    <p className="text-sm">That worked! Any good restaurants nearby?</p>
+                    <p className="text-sm">{t('whatsapp_followup')}</p>
                   </div>
                   <div className="bg-[#f0fdf4] p-3 rounded-lg ml-8">
-                    <p className="text-sm">I recommend Casa Romaneasca (5 min walk) - traditional cuisine, 4.8★ rating</p>
+                    <p className="text-sm">{t('whatsapp_recommendation')}</p>
                   </div>
                 </div>
               </div>

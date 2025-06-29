@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 
 interface Translations {
@@ -15,6 +14,12 @@ const translations = {
     hero_title: "Turn Every Guest Into a Raving Fan",
     hero_subtitle: "The AI assistant that makes property owners look like hospitality legends. 24/7 WhatsApp support, local recommendations, and revenue sharing—all while you sleep.",
     join_waitlist: "Join the Waitlist",
+    
+    // WhatsApp conversation
+    whatsapp_problem: "Hello! The coffee machine isn't working properly",
+    whatsapp_solution: "I can help with that! First, check if the water tank is properly seated...",
+    whatsapp_followup: "That worked! Any good restaurants nearby?",
+    whatsapp_recommendation: "I recommend Casa Romaneasca (5 min walk) - traditional cuisine, 4.8★ rating",
     
     // Problem Section
     stop_losing_sleep: "Stop Losing Sleep Over Guest Messages",
@@ -84,6 +89,12 @@ const translations = {
     hero_title: "Transformă Fiecare Oaspete Într-un Fan Înfocat",
     hero_subtitle: "Asistentul AI care îi face pe proprietarii de locuințe să pară legende în ospitalitate. Suport WhatsApp 24/7, recomandări locale și venituri suplimentare—totul în timp ce dormi.",
     join_waitlist: "Alătură-te Listei de Așteptare",
+    
+    // WhatsApp conversation
+    whatsapp_problem: "Salut! Espresorul nu funcționează cum trebuie",
+    whatsapp_solution: "Te pot ajuta! Întâi verifică dacă rezervorul de apă este așezat corect...",
+    whatsapp_followup: "A mers! Știi restaurante bune prin zonă?",
+    whatsapp_recommendation: "Îți recomand Casa Românească (5 min pe jos) - bucătărie tradițională, 4.8★",
     
     // Problem Section
     stop_losing_sleep: "Nu Mai Pierde Somnul Din Cauza Mesajelor Oaspeților",
