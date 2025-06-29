@@ -5,17 +5,19 @@ import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle, Smartphone, MapPin, Star, Zap, DollarSign, Clock } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const WelcoLanding = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { t, isLoading: languageLoading } = useLanguage();
 
   const handleWaitlistSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes('@')) {
       toast({
-        title: "Invalid email",
-        description: "Please enter a valid email address.",
+        title: t('invalid_email'),
+        description: t('invalid_email_description'),
         variant: "destructive"
       });
       return;
@@ -30,8 +32,8 @@ const WelcoLanding = () => {
       if (error) {
         if (error.code === '23505') {
           toast({
-            title: "Already registered",
-            description: "This email is already on our waitlist.",
+            title: t('already_registered'),
+            description: t('already_registered_description'),
             variant: "destructive"
           });
         } else {
@@ -39,16 +41,16 @@ const WelcoLanding = () => {
         }
       } else {
         toast({
-          title: "Welcome to Welco!",
-          description: "You've been added to our waitlist. We'll notify you when we launch."
+          title: t('welcome_to_welco'),
+          description: t('welcome_description')
         });
         setEmail('');
       }
     } catch (error) {
       console.error('Waitlist signup error:', error);
       toast({
-        title: "Something went wrong",
-        description: "Please try again later.",
+        title: t('something_wrong'),
+        description: t('try_again'),
         variant: "destructive"
       });
     } finally {
@@ -56,19 +58,27 @@ const WelcoLanding = () => {
     }
   };
 
+  if (languageLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-2xl font-bold text-[#1a2444]">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold text-[#1a2444]" style={{fontFamily: 'Labil Grotesk, Inter, sans-serif'}}>
-            Welco
+            {t('company_name')}
           </div>
           <Button 
             onClick={() => document.getElementById('signup')?.scrollIntoView({behavior: 'smooth'})}
             className="bg-[#f59e0b] hover:bg-[#d97706] text-white px-6 py-2"
           >
-            Get Early Access
+            {t('get_early_access')}
           </Button>
         </div>
       </header>
@@ -79,17 +89,16 @@ const WelcoLanding = () => {
           <div className="grid lg:grid-cols-5 gap-12 items-center">
             <div className="lg:col-span-3">
               <h1 className="text-4xl lg:text-5xl font-bold text-[#1a2444] leading-tight mb-6" style={{fontFamily: 'Labil Grotesk, Inter, sans-serif'}}>
-                Turn Every Guest Into a Raving Fan
+                {t('hero_title')}
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                The AI assistant that makes property owners look like hospitality legends. 
-                24/7 WhatsApp support, local recommendations, and revenue sharing—all while you sleep.
+                {t('hero_subtitle')}
               </p>
               <Button 
                 onClick={() => document.getElementById('signup')?.scrollIntoView({behavior: 'smooth'})}
                 className="bg-[#f59e0b] hover:bg-[#d97706] text-white text-lg px-8 py-4 mb-4"
               >
-                Join the Waitlist
+                {t('join_waitlist')}
               </Button>
             </div>
             <div className="lg:col-span-2">
@@ -124,23 +133,23 @@ const WelcoLanding = () => {
       <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#1a2444] mb-12" style={{fontFamily: 'Labil Grotesk, Inter, sans-serif'}}>
-            Stop Losing Sleep Over Guest Messages
+            {t('stop_losing_sleep')}
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
               <Clock className="h-12 w-12 text-[#f59e0b] mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-[#1a2444] mb-2">5-7 Hours Weekly</h3>
-              <p className="text-gray-600">Answering the same appliance questions repeatedly</p>
+              <h3 className="text-xl font-bold text-[#1a2444] mb-2">{t('hours_weekly')}</h3>
+              <p className="text-gray-600">{t('hours_description')}</p>
             </div>
             <div className="text-center">
               <DollarSign className="h-12 w-12 text-[#f59e0b] mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-[#1a2444] mb-2">Missed Revenue</h3>
-              <p className="text-gray-600">No time to provide premium local recommendations</p>
+              <h3 className="text-xl font-bold text-[#1a2444] mb-2">{t('missed_revenue')}</h3>
+              <p className="text-gray-600">{t('missed_revenue_description')}</p>
             </div>
             <div className="text-center">
               <Star className="h-12 w-12 text-[#f59e0b] mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-[#1a2444] mb-2">Rating Anxiety</h3>
-              <p className="text-gray-600">Response delays hurt your booking platform ratings</p>
+              <h3 className="text-xl font-bold text-[#1a2444] mb-2">{t('rating_anxiety')}</h3>
+              <p className="text-gray-600">{t('rating_anxiety_description')}</p>
             </div>
           </div>
         </div>
@@ -150,16 +159,16 @@ const WelcoLanding = () => {
       <section className="py-20 bg-[#f8fafc]">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#1a2444] text-center mb-14" style={{fontFamily: 'Labil Grotesk, Inter, sans-serif'}}>
-            Meet Your 24/7 Hospitality Expert
+            {t('meet_expert')}
           </h2>
           <div className="grid lg:grid-cols-3 gap-8">
             <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="p-8 text-center">
                 <Zap className="h-12 w-12 text-[#f59e0b] mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-[#1a2444] mb-4">Instant Appliance Support</h3>
-                <p className="text-gray-600 mb-6">AI knows every appliance manual. Guests get step-by-step help instantly.</p>
+                <h3 className="text-2xl font-bold text-[#1a2444] mb-4">{t('instant_support')}</h3>
+                <p className="text-gray-600 mb-6">{t('instant_support_description')}</p>
                 <div className="bg-gray-100 p-4 rounded-lg">
-                  <p className="text-sm text-gray-700 italic">"How do I turn on the dishwasher?" → Instant visual guide</p>
+                  <p className="text-sm text-gray-700 italic">{t('instant_support_example')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -167,10 +176,10 @@ const WelcoLanding = () => {
             <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="p-8 text-center">
                 <MapPin className="h-12 w-12 text-[#f59e0b] mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-[#1a2444] mb-4">Local Expert Recommendations</h3>
-                <p className="text-gray-600 mb-6">Curated local business partnerships. You earn 5% from every recommendation.</p>
+                <h3 className="text-2xl font-bold text-[#1a2444] mb-4">{t('local_expert')}</h3>
+                <p className="text-gray-600 mb-6">{t('local_expert_description')}</p>
                 <div className="bg-gray-100 p-4 rounded-lg">
-                  <p className="text-sm text-gray-700 italic">Restaurant bookings → €5-15 commission per guest</p>
+                  <p className="text-sm text-gray-700 italic">{t('local_expert_example')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -178,10 +187,10 @@ const WelcoLanding = () => {
             <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="p-8 text-center">
                 <Star className="h-12 w-12 text-[#f59e0b] mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-[#1a2444] mb-4">Perfect Hosting Image</h3>
-                <p className="text-gray-600 mb-6">Guests think you're incredibly responsive. You're actually sleeping.</p>
+                <h3 className="text-2xl font-bold text-[#1a2444] mb-4">{t('perfect_hosting')}</h3>
+                <p className="text-gray-600 mb-6">{t('perfect_hosting_description')}</p>
                 <div className="bg-gray-100 p-4 rounded-lg">
-                  <p className="text-sm text-gray-700 italic">"⭐⭐⭐⭐⭐ Host responded instantly at 2 AM!"</p>
+                  <p className="text-sm text-gray-700 italic">{t('perfect_hosting_example')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -193,87 +202,26 @@ const WelcoLanding = () => {
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#1a2444] mb-8" style={{fontFamily: 'Labil Grotesk, Inter, sans-serif'}}>
-            Finally, Technology That Pays You Back
+            {t('technology_pays_back')}
           </h2>
           <div className="bg-[#f8fafc] rounded-2xl p-8 mb-8">
             <div className="grid md:grid-cols-3 gap-4 items-center">
               <div className="text-center">
-                <p className="text-lg text-gray-600">Monthly Cost</p>
+                <p className="text-lg text-gray-600">{t('monthly_cost')}</p>
                 <p className="text-2xl font-bold text-[#1a2444]">€12-20</p>
               </div>
               <div className="text-center">
                 <div className="text-4xl text-[#f59e0b]">→</div>
               </div>
               <div className="text-center">
-                <p className="text-lg text-gray-600">Potential Earnings</p>
+                <p className="text-lg text-gray-600">{t('potential_earnings')}</p>
                 <p className="text-3xl font-bold text-[#f59e0b]">€51-105</p>
               </div>
             </div>
           </div>
           <p className="text-lg text-gray-600">
-            5% revenue share from local business partnerships. The more you recommend, the more you earn.
+            {t('revenue_share_description')}
           </p>
-        </div>
-      </section>
-
-      {/* Social Proof Section */}
-      <section className="py-16 bg-[#f8fafc]">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-[#1a2444] text-center mb-12" style={{fontFamily: 'Labil Grotesk, Inter, sans-serif'}}>
-            Join Property Owners Already Succeeding
-          </h2>
-          <div className="grid lg:grid-cols-3 gap-8">
-            <Card className="bg-white shadow-lg">
-              <CardContent className="p-6">
-                <p className="text-gray-600 mb-4 italic">
-                  "My guests love the instant help. I've earned €180 in restaurant commissions this month alone."
-                </p>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-[#f59e0b] rounded-full flex items-center justify-center text-white font-bold mr-3">
-                    AM
-                  </div>
-                  <div>
-                    <p className="font-semibold text-[#1a2444]">Ana Muresan</p>
-                    <p className="text-sm text-gray-500">Vila Ana, Brasov</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-white shadow-lg">
-              <CardContent className="p-6">
-                <p className="text-gray-600 mb-4 italic">
-                  "I sleep through the night now. Welco handles everything perfectly."
-                </p>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-[#f59e0b] rounded-full flex items-center justify-center text-white font-bold mr-3">
-                    MI
-                  </div>
-                  <div>
-                    <p className="font-semibold text-[#1a2444]">Mihai Ionescu</p>
-                    <p className="text-sm text-gray-500">Apartment Complex, Bucharest</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-white shadow-lg">
-              <CardContent className="p-6">
-                <p className="text-gray-600 mb-4 italic">
-                  "5-star reviews increased 40% since using Welco. Guests mention our 'exceptional service'."
-                </p>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-[#f59e0b] rounded-full flex items-center justify-center text-white font-bold mr-3">
-                    EP
-                  </div>
-                  <div>
-                    <p className="font-semibold text-[#1a2444]">Elena Popescu</p>
-                    <p className="text-sm text-gray-500">Mountain Cabin, Sinaia</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </section>
 
@@ -380,15 +328,15 @@ const WelcoLanding = () => {
       <section id="signup" className="py-24 bg-[#1a2444]">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6" style={{fontFamily: 'Labil Grotesk, Inter, sans-serif'}}>
-            Ready to Become a Legendary Host?
+            {t('ready_legendary_host')}
           </h2>
           <p className="text-lg text-gray-300 mb-8">
-            Join the waitlist for early access.
+            {t('join_waitlist_early_access')}
           </p>
           <form onSubmit={handleWaitlistSignup} className="flex flex-col sm:flex-row gap-4 mb-4">
             <Input
               type="email"
-              placeholder="Enter your email address"
+              placeholder={t('enter_email')}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="flex-1 bg-white border-0 text-gray-900 placeholder-gray-500"
@@ -399,12 +347,73 @@ const WelcoLanding = () => {
               disabled={isLoading}
               className="bg-[#f59e0b] hover:bg-[#d97706] text-[#1a2444] font-bold px-8 py-3"
             >
-              {isLoading ? 'Joining...' : 'Join Waitlist'}
+              {isLoading ? t('joining') : t('join_waitlist')}
             </Button>
           </form>
           <p className="text-sm text-gray-400">
-            No spam. Updates on launch timeline only.
+            {t('no_spam')}
           </p>
+        </div>
+      </section>
+
+      {/* Social Proof Section - Moved below signup */}
+      <section className="py-16 bg-[#f8fafc]">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-[#1a2444] text-center mb-12" style={{fontFamily: 'Labil Grotesk, Inter, sans-serif'}}>
+            {t('join_owners_succeeding')}
+          </h2>
+          <div className="grid lg:grid-cols-3 gap-8">
+            <Card className="bg-white shadow-lg">
+              <CardContent className="p-6">
+                <p className="text-gray-600 mb-4 italic">
+                  {t('testimonial1')}
+                </p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-[#f59e0b] rounded-full flex items-center justify-center text-white font-bold mr-3">
+                    AM
+                  </div>
+                  <div>
+                    <p className="font-semibold text-[#1a2444]">{t('testimonial1_name')}</p>
+                    <p className="text-sm text-gray-500">{t('testimonial1_location')}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white shadow-lg">
+              <CardContent className="p-6">
+                <p className="text-gray-600 mb-4 italic">
+                  {t('testimonial2')}
+                </p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-[#f59e0b] rounded-full flex items-center justify-center text-white font-bold mr-3">
+                    MI
+                  </div>
+                  <div>
+                    <p className="font-semibold text-[#1a2444]">{t('testimonial2_name')}</p>
+                    <p className="text-sm text-gray-500">{t('testimonial2_location')}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white shadow-lg">
+              <CardContent className="p-6">
+                <p className="text-gray-600 mb-4 italic">
+                  {t('testimonial3')}
+                </p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-[#f59e0b] rounded-full flex items-center justify-center text-white font-bold mr-3">
+                    EP
+                  </div>
+                  <div>
+                    <p className="font-semibold text-[#1a2444]">{t('testimonial3_name')}</p>
+                    <p className="text-sm text-gray-500">{t('testimonial3_location')}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
 
@@ -413,10 +422,10 @@ const WelcoLanding = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-2xl font-bold text-white mb-4 md:mb-0" style={{fontFamily: 'Labil Grotesk, Inter, sans-serif'}}>
-              Welco
+              {t('company_name')}
             </div>
             <div className="text-gray-300 mb-4 md:mb-0">
-              Building the future of hospitality
+              {t('building_future')}
             </div>
             <div className="text-gray-300">
               contact@welco.ro
