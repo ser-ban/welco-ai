@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -83,18 +82,15 @@ const WelcoLanding = () => {
                 Turn Every Guest Into a Raving Fan
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                The AI assistant that makes Romanian property owners look like hospitality legends. 
+                The AI assistant that makes property owners look like hospitality legends. 
                 24/7 WhatsApp support, local recommendations, and revenue sharing—all while you sleep.
               </p>
               <Button 
                 onClick={() => document.getElementById('signup')?.scrollIntoView({behavior: 'smooth'})}
                 className="bg-[#f59e0b] hover:bg-[#d97706] text-white text-lg px-8 py-4 mb-4"
               >
-                Join the Waitlist → €12-20/month
+                Join the Waitlist
               </Button>
-              <p className="text-sm text-gray-500">
-                Starting with Romanian properties • Expanding EU-wide in 2025
-              </p>
             </div>
             <div className="lg:col-span-2">
               <div className="bg-white rounded-2xl shadow-xl p-6 max-w-sm mx-auto">
@@ -224,7 +220,7 @@ const WelcoLanding = () => {
       <section className="py-16 bg-[#f8fafc]">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-[#1a2444] text-center mb-12" style={{fontFamily: 'Labil Grotesk, Inter, sans-serif'}}>
-            Join Romanian Property Owners Already Succeeding
+            Join Property Owners Already Succeeding
           </h2>
           <div className="grid lg:grid-cols-3 gap-8">
             <Card className="bg-white shadow-lg">
@@ -281,8 +277,8 @@ const WelcoLanding = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-20 bg-white">
+      {/* Pricing Section - Hidden but kept in code */}
+      <section className="py-20 bg-white hidden">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#1a2444] text-center mb-12" style={{fontFamily: 'Labil Grotesk, Inter, sans-serif'}}>
             Simple, Transparent Pricing
@@ -387,7 +383,7 @@ const WelcoLanding = () => {
             Ready to Become a Legendary Host?
           </h2>
           <p className="text-lg text-gray-300 mb-8">
-            Join the waitlist for early access. Romanian properties only initially.
+            Join the waitlist for early access.
           </p>
           <form onSubmit={handleWaitlistSignup} className="flex flex-col sm:flex-row gap-4 mb-4">
             <Input
