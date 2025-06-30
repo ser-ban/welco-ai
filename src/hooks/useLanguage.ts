@@ -83,7 +83,7 @@ const translations = {
   ro: {
     // Header
     company_name: "Welco",
-    get_early_access: "Obține Acces Timpuriu",
+    get_early_access: "Obține Acces",
     
     // Hero Section
     hero_title: "Transformă Fiecare Oaspete Într-un Fan Înfocat",
@@ -137,7 +137,7 @@ const translations = {
     
     // Final CTA
     ready_legendary_host: "Gata să Devii o Gazdă Legendară?",
-    join_waitlist_early_access: "Alătură-te listei de așteptare pentru acces timpuriu.",
+    join_waitlist_early_access: "Alătură-te listei de așteptare pentru acces cu prioritate.",
     enter_email: "Introdu adresa ta de email",
     joining: "Se înscrie...",
     no_spam: "Fără spam. Doar actualizări despre lansare.",
